@@ -1,4 +1,9 @@
-load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
+
+cc_binary(
+    name = "TestStage",
+    srcs = ["testStage.cpp"],
+)
 
 cc_library(
     name = "SHITTestHelper",
