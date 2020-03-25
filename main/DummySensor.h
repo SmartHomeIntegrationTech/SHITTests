@@ -43,7 +43,8 @@ class DummySensor : public SHI::Sensor {
                                                  SHI::SensorDataType::FLOAT);
   float humidtyValue = 0;
   float temperatureValue = 0;
-  SHI::Configuration *getConfig() override { return nullptr; }
+  const SHI::Configuration *getConfig() const override { return nullptr; }
+  bool reconfigure(SHI::Configuration *newConfig) override { return true; }
 
  private:
 };

@@ -34,7 +34,8 @@ class LoggingCommunicator : public SHI::Communicator {
     SHI::hw->logInfo(name, __func__, status.toTransmitString());
   }
 
-  SHI::Configuration *getConfig() override { return nullptr; }
+  const SHI::Configuration *getConfig() const override { return nullptr; }
+  bool reconfigure(SHI::Configuration *newConfig) override { return true; }
 
  protected:
   const std::string dataType[4]{"INT", "FLOAT", "STRING", "STATUS"};

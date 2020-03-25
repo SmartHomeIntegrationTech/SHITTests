@@ -10,6 +10,7 @@
 #include <sys/time.h>
 
 #include <iostream>
+#include <string>
 
 #include "SHIHardware.h"
 
@@ -65,7 +66,8 @@ class LoggingHardware : public SHI::Hardware {
     gettimeofday(&tv, NULL);
     return (tv.tv_sec * 1000LL + (tv.tv_usec / 1000LL));
   }
-  SHI::Configuration *getConfig() override { return nullptr; }
+  const SHI::Configuration *getConfig() const override { return nullptr; }
+  bool reconfigure(Configuration *newConfig) override { return true; }
   const char *resetReason = "NONE";
 
  protected:
