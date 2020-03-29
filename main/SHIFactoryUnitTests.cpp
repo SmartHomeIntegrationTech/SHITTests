@@ -49,6 +49,8 @@ class FactoryTest : public ::testing::Test {
 TEST_F(FactoryTest, testRegistry) {
   auto factory = SHI::Factory::get();
   ASSERT_EQ(SHI::hw, nullptr);
+  ASSERT_EQ(factory->construct("404 Website not found"),
+            SHI::FactoryErrors::FailureToParseJson);
   ASSERT_EQ(factory->construct("{}"), SHI::FactoryErrors::NoHWKeyFound);
   ASSERT_EQ(factory->construct("{\"hw\":{}}"),
             SHI::FactoryErrors::MissingRegistryForHW);
@@ -59,3 +61,5 @@ TEST_F(FactoryTest, testRegistry) {
   ASSERT_EQ(factory->construct("{\"hw\":{}}"), SHI::FactoryErrors::None);
   ASSERT_NE(SHI::hw, nullptr);
 }
+
+// TEST_F(FactoryTest, generateJSONConfig) { registerDefaultFactories(); }

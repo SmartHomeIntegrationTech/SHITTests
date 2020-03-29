@@ -36,3 +36,12 @@ cc_test(
         "@googletest//:gtest_main",
     ],
 )
+
+cc_test(
+    name = "EventBusUnitTests",
+    srcs = ["SHIEventBusUnitTests.cpp"],
+    deps = [
+        ":SHITTestHelper",
+        "@googletest//:gtest_main",
+    ],
+)
