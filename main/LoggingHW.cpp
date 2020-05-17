@@ -5,6 +5,7 @@
 //  Created by Karsten Becker on 20.02.20.
 //  Copyright © 2020 Karsten Becker. All rights reserved.
 //
+#include "LoggingHW.h"
 
 #include <iostream>
 

@@ -7,14 +7,24 @@
 //
 
 #pragma once
+#include <ArduinoJson.h>
+#include <SHIFactory.h>
+#include <SHIHardware.h>
 #include <sys/time.h>
 
 #include <iostream>
 #include <string>
 
-#include "SHIHardware.h"
-
 namespace SHI {
+
+class LoggingHardwareConfig : public SHI::Configuration {
+ public:
+  int loggingLevel = 0;
+  LoggingHardwareConfig() {}
+  explicit LoggingHardwareConfig(const JsonObject &obj);
+  void fillData(JsonObject &doc) const override;
+  int getExpectedCapacity() const override;
+};
 
 class LoggingHardware : public SHI::Hardware {
  public:
@@ -66,11 +76,15 @@ class LoggingHardware : public SHI::Hardware {
     gettimeofday(&tv, NULL);
     return (tv.tv_sec * 1000LL + (tv.tv_usec / 1000LL));
   }
-  const SHI::Configuration *getConfig() const override { return nullptr; }
-  bool reconfigure(Configuration *newConfig) override { return true; }
+  const SHI::Configuration *getConfig() const override { return &config; }
+  bool reconfigure(Configuration *newConfig) override {
+    config = castConfig<LoggingHardwareConfig>(newConfig);
+    return true;
+  }
   const char *resetReason = "NONE";
 
  protected:
+  LoggingHardwareConfig config;
   void log(const std::string &message) override {
     std::cout << message << std::endl;
   };

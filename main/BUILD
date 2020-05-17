@@ -8,7 +8,10 @@ cc_binary(
 cc_library(
     name = "SHITTestHelper",
     srcs =
-        ["LoggingHW.cpp"],
+        [
+            "LoggingHW.cpp",
+            "LoggingHW_config.cpp",
+        ],
     hdrs = glob(
         ["*.h"],
     ),

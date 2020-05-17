@@ -22,12 +22,13 @@ class LoggingCommunicator : public SHI::Communicator {
   void loopCommunication() override { SHI::hw->logInfo(name, __func__, ""); }
   void newReading(const SHI::MeasurementBundle &reading) override {
     for (auto &&data : reading.data) {
-      SHI::hw->logInfo(name, __func__,
-                       std::string(reading.src->getName()) + "." +
-                           data.getMetaData()->getName() + "=" +
-                           data.toTransmitString() + data.getMetaData()->unit +
-                           " " + dataType[(int)data.getMetaData()->type] + " " +
-                           dataState[(int)data.getDataState()]);
+      SHI::hw->logInfo(
+          name, __func__,
+          std::string(reading.src->getName()) + "." +
+              data.getMetaData()->getName() + "=" + data.toTransmitString() +
+              data.getMetaData()->unit + " " +
+              dataType[static_cast<int>(data.getMetaData()->type)] + " " +
+              dataState[static_cast<int>(data.getDataState())]);
     }
   }
   void newStatus(const SHI::Measurement &status, SHI::SHIObject *src) override {

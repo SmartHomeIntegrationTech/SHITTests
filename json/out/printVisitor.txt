@@ -1,0 +1,10 @@
+HW:LoggingHardware Status:OK
+ MD:Status unit: type:3 Status:<NO_DATA>
+ C:LoggingCommunicator Status:OK
+ MD:Status unit: type:3 Status:<NO_DATA>
+ CH:default Status:<NO_DATA>
+  S:Dummy Status:OK
+   MD:Status unit: type:3 Status:<NO_DATA>
+ CH:OutsideChannel Status:<NO_DATA>
+  S:Dummy Status:OK
+   MD:Status unit: type:3 Status:<NO_DATA>

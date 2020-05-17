@@ -1,0 +1,31 @@
+{
+  "hw": {
+    "$comms": [
+      {
+        "LoggingCommunicator": {}
+      }
+    ],
+    "$groups": [
+      {
+        "sensorGroup": {
+          "name": "default",
+          "$sensors": [
+            {
+              "Dummy": {}
+            }
+          ]
+        }
+      },
+      {
+        "sensorGroup": {
+          "name": "OutsideChannel",
+          "$sensors": [
+            {
+              "Dummy": {}
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
