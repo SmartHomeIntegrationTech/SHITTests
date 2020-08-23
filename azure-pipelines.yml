@@ -13,9 +13,7 @@ pool:
 steps:
 - script: 'sudo apt-get install bazel'
   displayName: 'Installing Bazel'
-- script: 'mkdir $(Common.TestResultsDirectory)'
-  displayName: 'Creating testresult directory'
-- bash: 'bazel test --test_output=all ...;exit 0'
+- bash: 'bazel test --test_output=all --test_tmpdir=$(Common.TestResultsDirectory) ...;exit 0'
   displayName: 'Running tests'
   env:
     XML_OUTPUT_FILE: $(Common.TestResultsDirectory)/test.xml
