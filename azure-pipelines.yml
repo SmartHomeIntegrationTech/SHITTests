@@ -27,12 +27,12 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/test.xml'
+    testResultsFiles: '$(Common.TestResultsDirectory)/output/execroot/__main__/bazel-out/k8-fastbuild/testlogs/**/test.xml'
     testRunTitle: 'All tests'
   displayName: 'Publishing results'
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Common.TestResultsDirectory)'
+    rootFolderOrFile: '$(Common.TestResultsDirectory)/output/execroot/__main__/bazel-out/k8-fastbuild/testlogs/'
     includeRootFolder: true
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
