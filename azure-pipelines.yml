@@ -12,5 +12,10 @@ pool:
 steps:
 - script: 'sudo apt-get install bazel'
   displayName: 'Install Bazel'
-- script: 'bazel test --verbose_failures ...'
+- script: 'bazel test ...'
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST-*.xml'
+    testRunTitle: 'All tests'
   displayName: 'Running tests'
