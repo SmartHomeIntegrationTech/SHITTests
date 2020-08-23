@@ -13,16 +13,31 @@ pool:
 steps:
 - script: 'sudo apt-get install bazel'
   displayName: 'Installing Bazel'
-- script: 'bazel test ...'
-  displayName: 'Running Tests'
+- bash: 'bazel test ...'
+  displayName: 'Running tests'
+  env:
+    XML_OUTPUT_FILE: $(Common.TestResultsDirectory)/test.xml
+    TEST_INFRASTRUCTURE_FAILURE_FILE: $(Common.TestResultsDirectory)/TEST_INFRASTRUCTURE_FAILURE_FILE
+    TEST_LOGSPLITTER_OUTPUT_FILE: $(Common.TestResultsDirectory)/TEST_LOGSPLITTER_OUTPUT_FILE
+    TEST_PREMATURE_EXIT_FILE: $(Common.TestResultsDirectory)/TEST_PREMATURE_EXIT_FILE
+    TEST_UNDECLARED_OUTPUTS_DIR: $(Common.TestResultsDirectory)/TEST_UNDECLARED_OUTPUTS_DIR
+    TEST_UNDECLARED_OUTPUTS_ANNOTATIONS_DIR: $(Common.TestResultsDirectory)/TEST_UNDECLARED_OUTPUTS_ANNOTATIONS_DIR
+    TEST_WARNINGS_OUTPUT_FILE: $(Common.TestResultsDirectory)/TEST_WARNINGS_OUTPUT_FILE
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/test.xml'
     testRunTitle: 'All tests'
   displayName: 'Publishing results'
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Common.TestResultsDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Pipeline.Workspace)'
-    artifact: '**/test.log'
+    targetPath: '$(Build.ArtifactStagingDirectory)'
+    artifact: '**/*'
     publishLocation: 'pipeline'
