@@ -108,7 +108,15 @@ TEST_F(PrinterTest, simpleCasesFloat) {
   printer.testAndReset("inf");
   ASSERT_EQ(printer.print(-3.14 / 0., 5), 4) << printer.result;
   printer.testAndReset("-inf");
-  ASSERT_EQ(printer.print(0.0 / 0.0, 5), 3) << printer.result;
+  printer.print(0.0 / 0.0, 5);
+  std::string str = printer.result;
+  std::string s1 = "nan";
+  s1.append(1, '\0');
+  std::string s2 = "-nan";
+  s2.append(1, '\0');
+  EXPECT_PRED3([](std::string str, std::string s1,
+                  std::string s2) { return str == s1 || str == s2; },
+               str, s1, s2);
   printer.testAndReset("nan");
 }
 

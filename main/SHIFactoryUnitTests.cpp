@@ -17,9 +17,9 @@
 #include "SHIBus.h"
 #include "SHIFactory.h"
 #include "gtest/gtest.h"
-
+#ifndef BASE_PATH
 #define BASE_PATH "/Users/karstenbecker/PlatformIO/Projects/SHITTests/json/"
-
+#endif
 class FactoryTest : public ::testing::Test {
  public:
   void registerDefaultFactories() {
