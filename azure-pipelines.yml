@@ -39,6 +39,6 @@ steps:
     replaceExistingArchive: true
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)'
-    artifact: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    artifact: 'Logs and output'
     publishLocation: 'pipeline'
