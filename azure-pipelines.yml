@@ -10,12 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-- task: CmdLine@2
-  inputs:
-    script: 'apt-get install bazel'
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- script: 'sudo apt-get install bazel'
+  displayName: 'Install Bazel'
+- script: 'bazel test --verbose_failures ...'
+  displayName: 'Running tests'
