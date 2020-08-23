@@ -27,7 +27,7 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/test.xml'
+    testResultsFiles: 'test.xml'
     testRunTitle: 'All tests'
   displayName: 'Publishing results'
 - task: ArchiveFiles@2
