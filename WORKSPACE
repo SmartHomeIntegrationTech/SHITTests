@@ -6,7 +6,13 @@ git_repository(
     tag = "release-1.10.0",
 )
 
-local_repository(
+#local_repository(
+#    name = "SHIT",
+#    path = "../SHIT",
+#)
+
+git_repository(
     name = "SHIT",
-    path = "../SHIT",
+    branch = "master",
+    remote = "https://github.com/SmartHomeIntegrationTech/SHIT",
 )
