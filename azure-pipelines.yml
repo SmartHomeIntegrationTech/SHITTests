@@ -13,7 +13,7 @@ pool:
 steps:
 - script: 'sudo apt-get install bazel'
   displayName: 'Installing Bazel'
-- bash: 'bazel test ...;echo "XML_OUTPUT_FILE=$XML_OUTPUT_FILE";ls $XML_OUTPUT_FILE'
+- bash: 'bazel test --test_output=all ...;exit 0'
   displayName: 'Running tests'
   env:
     XML_OUTPUT_FILE: $(Common.TestResultsDirectory)/test.xml
@@ -23,7 +23,7 @@ steps:
     TEST_UNDECLARED_OUTPUTS_DIR: $(Common.TestResultsDirectory)/TEST_UNDECLARED_OUTPUTS_DIR
     TEST_UNDECLARED_OUTPUTS_ANNOTATIONS_DIR: $(Common.TestResultsDirectory)/TEST_UNDECLARED_OUTPUTS_ANNOTATIONS_DIR
     TEST_WARNINGS_OUTPUT_FILE: $(Common.TestResultsDirectory)/TEST_WARNINGS_OUTPUT_FILE
-- script: 'ls $(Common.TestResultsDirectory)/*'
+- script: 'cat $(Common.TestResultsDirectory)/*'
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
