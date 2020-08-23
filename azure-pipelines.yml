@@ -13,6 +13,8 @@ pool:
 steps:
 - script: 'sudo apt-get install bazel'
   displayName: 'Installing Bazel'
+- script: 'mkdir $(Common.TestResultsDirectory)'
+  displayName: 'Creating testresult directory'
 - bash: 'bazel test --test_output=all ...;exit 0'
   displayName: 'Running tests'
   env:
@@ -23,7 +25,7 @@ steps:
     TEST_UNDECLARED_OUTPUTS_DIR: $(Common.TestResultsDirectory)/TEST_UNDECLARED_OUTPUTS_DIR
     TEST_UNDECLARED_OUTPUTS_ANNOTATIONS_DIR: $(Common.TestResultsDirectory)/TEST_UNDECLARED_OUTPUTS_ANNOTATIONS_DIR
     TEST_WARNINGS_OUTPUT_FILE: $(Common.TestResultsDirectory)/TEST_WARNINGS_OUTPUT_FILE
-- script: 'cat $(Common.TestResultsDirectory)/*'
+- script: 'cat $(Common.TestResultsDirectory)/*;exit 0'
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
