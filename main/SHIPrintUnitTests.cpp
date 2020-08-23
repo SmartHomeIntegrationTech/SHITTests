@@ -117,7 +117,6 @@ TEST_F(PrinterTest, simpleCasesFloat) {
   EXPECT_PRED3([](std::string str, std::string s1,
                   std::string s2) { return str == s1 || str == s2; },
                str, s1, s2);
-  printer.testAndReset("nan");
 }
 
 TEST_F(PrinterTest, simpleCasesStringChar) {
